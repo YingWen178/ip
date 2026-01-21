@@ -4,7 +4,7 @@ public class JoJo {
     public static void main(String[] args) {
         String horizontalLine = "____________________________________________________________";
 
-        ArrayList<String> list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         System.out.println(horizontalLine);
         System.out.println(" Hello! I'm JoJo");
@@ -20,18 +20,30 @@ public class JoJo {
             }
             else if (input.equalsIgnoreCase("list")) {
                 System.out.println(horizontalLine);
+                System.out.println(" Here are the tasks in your list:");
                 for (int i = 0; i < list.size(); i++) {
                     System.out.println(" " + (i + 1) + ". " + list.get(i));
                 }
-            } else {
-                list.add(input);
+            }
+            else if (input.startsWith("mark ")) {
+                int index = Integer.parseInt(input.substring(5)) - 1;
+                list.get(index).markAsDone();
+                System.out.println(horizontalLine);
+                System.out.println(" Nice! I've marked this task as done:");
+                System.out.println("   " + list.get(index));
+            }
+            else if (input.startsWith("unmark ")) {
+                int index = Integer.parseInt(input.substring(7)) - 1;
+                list.get(index).unmark();
+                System.out.println(horizontalLine);
+                System.out.println(" OK, I've marked this task as not done yet:");
+                System.out.println("   " + list.get(index));
+            }
+            else {
+                list.add(new Task(input));
                 System.out.println(horizontalLine);
                 System.out.println(" added: " + input);
             }
-//            if (input.equalsIgnoreCase("jojo")) {
-//                System.out.println(horizontalLine);
-//                System.out.println("It's me!");
-//            }
 
             System.out.println(horizontalLine);
         }
