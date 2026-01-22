@@ -83,8 +83,21 @@ public class JoJo {
                     System.out.println(" Got it. I've added this task:\n   " + e);
                     System.out.println(" Now you have " + list.size() + " tasks in the list.");
                 }
+                else if (input.startsWith("delete")) {
+                    if (input.trim().length() <= 6) {
+                        throw new JoJoException(" OOPS!!! Add a task number after 'delete'.");
+                    }
+                    if (!input.startsWith("delete ")) {
+                        throw new JoJoException(" OOPS!!! Please add a space after 'delete' follow by the task to delete.");
+                    }
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    Task removedTask = list.remove(index);
+                    System.out.println(" Noted. I've removed this task:");
+                    System.out.println("   " + removedTask);
+                    System.out.println(" Now you have " + list.size() + " tasks in the list.");
+                }
                 else {
-                    throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can list or create/edit a task instead");
+                    throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can list or create/edit/delete a task instead");
                 }
             }
             catch (JoJoException e) {
