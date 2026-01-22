@@ -39,6 +39,31 @@ public class JoJo {
                 System.out.println(" OK, I've marked this task as not done yet:");
                 System.out.println("   " + list.get(index));
             }
+            else if (input.startsWith("deadline ")) {
+                String[] str = input.substring(9).split(" /by ");
+                Deadline d = new Deadline(str[0], str[1]);
+                list.add(d);
+                System.out.println(horizontalLine);
+                System.out.println(" Got it. I've added this task:\n   " + d);
+                System.out.println(" Now you have " + list.size() + " tasks in the list.");
+            }
+            else if (input.startsWith("todo ")) {
+                String str = input.substring(5);
+                Todo t = new Todo(str);
+                list.add(t);
+                System.out.println(horizontalLine);
+                System.out.println(" Got it. I've added this task:\n   " + t);
+                System.out.println(" Now you have " + list.size() + " tasks in the list.");
+
+            }
+            else if (input.startsWith("event ")) {
+                String[] str = input.substring(6).split(" /from ");
+                String[] timeStr = str[1].split(" /to ");
+                Event e = new Event(str[0], timeStr[0], timeStr[1]);
+                list.add(e);
+                System.out.println(" Got it. I've added this task:\n   " + e);
+                System.out.println(" Now you have " + list.size() + " tasks in the list.");
+            }
             else {
                 list.add(new Task(input));
                 System.out.println(horizontalLine);
