@@ -1,0 +1,17 @@
+public class AddDeadlineCommand extends Command {
+    private String desc;
+    private String by;
+
+    public AddDeadlineCommand(String desc, String by) {
+        this.desc = desc;
+        this.by = by;
+    }
+
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        Deadline d = new Deadline(desc, by);
+        tasks.add(d);
+        ui.showAddedTask(d, tasks.size());
+        storage.save(tasks);
+    }
+}
