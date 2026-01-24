@@ -1,3 +1,5 @@
+package jojo.task;
+
 public enum taskEnum {
     TODO, DEADLINE, EVENT, BYE, LIST, MARK, UNMARK, DELETE, UNKNOWN
 }

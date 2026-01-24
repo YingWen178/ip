@@ -1,3 +1,10 @@
+package jojo.command;
+
+import jojo.storage.Storage;
+import jojo.task.Event;
+import jojo.task.TaskList;
+import jojo.ui.Ui;
+
 public class AddEventCommand extends Command {
     private String desc;
     private String from;

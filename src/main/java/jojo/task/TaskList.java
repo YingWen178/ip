@@ -1,3 +1,5 @@
+package jojo.task;
+
 import java.util.ArrayList;
 
 public class TaskList {

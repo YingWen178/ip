@@ -1,3 +1,7 @@
+package jojo.storage;
+
+import jojo.task.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

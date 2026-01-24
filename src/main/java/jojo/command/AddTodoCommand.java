@@ -1,3 +1,10 @@
+package jojo.command;
+
+import jojo.storage.Storage;
+import jojo.task.TaskList;
+import jojo.task.Todo;
+import jojo.ui.Ui;
+
 public class AddTodoCommand extends Command {
     private String desc;
     public AddTodoCommand(String desc) {

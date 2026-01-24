@@ -1,3 +1,7 @@
+package jojo.ui;
+
+import jojo.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {

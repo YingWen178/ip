@@ -1,3 +1,10 @@
+package jojo.command;
+
+import jojo.exception.JoJoException;
+import jojo.storage.Storage;
+import jojo.task.TaskList;
+import jojo.ui.Ui;
+
 public class UnmarkCommand extends Command {
     private int index;
 
@@ -8,7 +15,6 @@ public class UnmarkCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
         tasks.unmark(index);
-        ui.showLine();
         System.out.println(" OK, I've marked this task as not done yet:\n   " + tasks.get(index));
         storage.save(tasks);
     }

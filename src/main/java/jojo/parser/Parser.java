@@ -1,3 +1,8 @@
+package jojo.parser;
+
+import jojo.command.*;
+import jojo.exception.JoJoException;
+
 public class Parser {
 
     public static Command parse(String fullCommand) throws JoJoException {

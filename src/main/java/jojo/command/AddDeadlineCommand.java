@@ -1,3 +1,10 @@
+package jojo.command;
+
+import jojo.storage.Storage;
+import jojo.task.Deadline;
+import jojo.task.TaskList;
+import jojo.ui.Ui;
+
 public class AddDeadlineCommand extends Command {
     private String desc;
     private String by;
