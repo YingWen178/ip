@@ -1,10 +1,73 @@
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
 public class JoJo {
+    private static final String FILE_PATH = "jojo.txt";
+
+    private static void writeToFile(ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter(FILE_PATH);
+            for (Task t : list) {
+                fw.write(t.toSaveString() + System.lineSeparator());
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println(" Error saving to file: " + e.getMessage());
+        }
+    }
+
+    private static Task parseTask(String line) {
+        String[] parts = line.split(" \\| ");
+        String type = parts[0];
+        boolean isDone = parts[1].equals("1");
+        String description = parts[2];
+
+        Task task;
+        switch (type) {
+            case "T":
+                task = new Todo(description);
+                break;
+            case "D":
+                task = new Deadline(description, parts[3]);
+                break;
+            case "E":
+                task = new Event(description, parts[3], parts[4]);
+                break;
+            default:
+                return null;
+        }
+
+        if (isDone) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
     public static void main(String[] args) {
         String horizontalLine = "____________________________________________________________";
 
         ArrayList<Task> list = new ArrayList<>();
+
+        File file = new File(FILE_PATH);
+        try {
+            if (file.createNewFile()) {
+                System.out.println(horizontalLine);
+                System.out.println(" No file found. Created new file: jojo.txt");
+            } else {
+                Scanner fileScanner = new Scanner(file);
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    if (!line.trim().isEmpty()) {
+                        list.add(parseTask(line));
+                    }
+                }
+                fileScanner.close();
+            }
+        } catch (IOException e) {
+            System.out.println(" Error reading data file: " + e.getMessage());
+        }
 
         System.out.println(horizontalLine);
         System.out.println(" Hello! I'm JoJo");
@@ -42,6 +105,7 @@ public class JoJo {
                         System.out.println(horizontalLine);
                         System.out.println(" Nice! I've marked this task as done:");
                         System.out.println("   " + list.get(indexMark));
+                        writeToFile(list);
                         break;
 
                     case UNMARK:
@@ -50,6 +114,7 @@ public class JoJo {
                         System.out.println(horizontalLine);
                         System.out.println(" OK, I've marked this task as not done yet:");
                         System.out.println("   " + list.get(indexUnmark));
+                        writeToFile(list);
                         break;
 
                     case DEADLINE:
@@ -65,6 +130,7 @@ public class JoJo {
                         System.out.println(horizontalLine);
                         System.out.println(" Got it. I've added this task:\n   " + d);
                         System.out.println(" Now you have " + list.size() + " tasks in the list.");
+                        writeToFile(list);
                         break;
 
                     case TODO:
@@ -80,6 +146,7 @@ public class JoJo {
                         System.out.println(horizontalLine);
                         System.out.println(" Got it. I've added this task:\n   " + t);
                         System.out.println(" Now you have " + list.size() + " tasks in the list.");
+                        writeToFile(list);
                         break;
 
                     case EVENT:
@@ -95,6 +162,7 @@ public class JoJo {
                         list.add(e);
                         System.out.println(" Got it. I've added this task:\n   " + e);
                         System.out.println(" Now you have " + list.size() + " tasks in the list.");
+                        writeToFile(list);
                         break;
 
                     case DELETE:
@@ -109,6 +177,7 @@ public class JoJo {
                         System.out.println(" Noted. I've removed this task:");
                         System.out.println("   " + removedTask);
                         System.out.println(" Now you have " + list.size() + " tasks in the list.");
+                        writeToFile(list);
                         break;
 
                     case UNKNOWN:
