@@ -21,4 +21,16 @@ public class AddDeadlineCommand extends Command {
         ui.showAddedTask(d, tasks.size());
         storage.save(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof AddDeadlineCommand) {
+            AddDeadlineCommand other = (AddDeadlineCommand) obj;
+            return this.desc.equals(other.desc) && this.by.equals(other.by);
+        }
+        return false;
+    }
 }

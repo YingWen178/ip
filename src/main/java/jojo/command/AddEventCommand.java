@@ -23,4 +23,18 @@ public class AddEventCommand extends Command {
         ui.showAddedTask(e, tasks.size());
         storage.save(tasks);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof AddEventCommand) {
+            AddEventCommand other = (AddEventCommand) obj;
+            return this.desc.equals(other.desc)
+                    && this.from.equals(other.from)
+                    && this.to.equals(other.to);
+        }
+        return false;
+    }
 }

@@ -34,7 +34,7 @@ public class Parser {
                     throw new JoJoException(" OOPS!!! Use format: deadline [task] /by [date(yyyy-mm-dd)]");
                 }
                 String[] dParts = arguments.split(" /by ");
-                return new AddDeadlineCommand(dParts[0], dParts[1]);
+                return new AddDeadlineCommand(dParts[0].trim(), dParts[1].trim());
 
             case "EVENT":
                 if (!arguments.contains(" /from ") || !arguments.contains(" /to ")) {
@@ -42,7 +42,7 @@ public class Parser {
                 }
                 String[] eParts = arguments.split(" /from ");
                 String[] tParts = eParts[1].split(" /to ");
-                return new AddEventCommand(eParts[0], tParts[0], tParts[1]);
+                return new AddEventCommand(eParts[0].trim(), tParts[0].trim(), tParts[1].trim());
 
             case "DELETE":
                 if (arguments.isEmpty()) {
@@ -51,7 +51,7 @@ public class Parser {
                 return new DeleteCommand(parseIndex(arguments));
 
             default:
-                throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye. ");
+                throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
         }
     }
 
