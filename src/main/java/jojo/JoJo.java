@@ -1,3 +1,4 @@
+package jojo;
 import jojo.command.Command;
 import jojo.exception.JoJoException;
 import jojo.parser.Parser;
