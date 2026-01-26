@@ -3,7 +3,7 @@ package jojo.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -39,5 +39,21 @@ public class TaskList {
 
     public ArrayList<Task> getAll() {
         return tasks;
+    }
+
+    /**
+     * Finds tasks that contain the given keyword in their description.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of tasks matching the keyword.
+     */
+    public ArrayList<Task> find(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            if (t.toString().contains(keyword)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
     }
 }
