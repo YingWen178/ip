@@ -8,13 +8,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles the loading and saving of task data to a local file.
+ * Responsible for reading from and writing to the hard disk.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a new Storage instance.
+     *
+     * @param filePath The file path where tasks will be stored and retrieved.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks from the file specified during initialization.
+     * If the file does not exist, a new empty file is created.
+     *
+     * @return An ArrayList of Task objects parsed from the storage file.
+     * @throws IOException If there is an error creating or reading the file.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
@@ -35,6 +51,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves the current list of tasks to the storage file.
+     * Overwrites the existing file content with the current task list.
+     *
+     * @param tasks The TaskList containing the tasks to save.
+     */
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -47,6 +69,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a single line of text from the storage file into a Task object.
+     * format: TYPE | IS_DONE | DESCRIPTION | [EXTRA_ARGS]
+     *
+     * @param line The raw string line from the file.
+     * @return A Task object (Todo, Deadline, or Event), or null if the type is unknown.
+     */
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
         String type = parts[0];

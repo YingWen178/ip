@@ -3,8 +3,18 @@ package jojo.parser;
 import jojo.command.*;
 import jojo.exception.JoJoException;
 
+/**
+ * Parses user input into executable commands.
+ */
 public class Parser {
 
+    /**
+     * Parses the full user command and returns the corresponding Command object.
+     *
+     * @param fullCommand The full string input entered by the user.
+     * @return A Command object corresponding to the user's input.
+     * @throws JoJoException If the command format is invalid or unknown.
+     */
     public static Command parse(String fullCommand) throws JoJoException {
         String[] parts = fullCommand.split(" ", 2);
         String commandWord = parts[0].toUpperCase();
@@ -55,6 +65,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses a string argument into a zero-based index.
+     *
+     * @param args The string containing the index number.
+     * @return The zero-based index (input - 1).
+     * @throws JoJoException If the input is not a valid integer.
+     */
     private static int parseIndex(String args) throws JoJoException {
         try {
             return Integer.parseInt(args) - 1;
