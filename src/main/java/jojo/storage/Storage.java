@@ -1,12 +1,16 @@
 package jojo.storage;
 
-import jojo.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import jojo.task.Deadline;
+import jojo.task.Event;
+import jojo.task.Task;
+import jojo.task.TaskList;
+import jojo.task.Todo;
 
 public class Storage {
     private String filePath;
@@ -55,17 +59,17 @@ public class Storage {
 
         Task task;
         switch (type) {
-            case "T":
-                task = new Todo(description);
-                break;
-            case "D":
-                task = new Deadline(description, parts[3]);
-                break;
-            case "E":
-                task = new Event(description, parts[3], parts[4]);
-                break;
-            default:
-                return null;
+        case "T":
+            task = new Todo(description);
+            break;
+        case "D":
+            task = new Deadline(description, parts[3]);
+            break;
+        case "E":
+            task = new Event(description, parts[3], parts[4]);
+            break;
+        default:
+            return null;
         }
 
         if (isDone) {

@@ -6,7 +6,7 @@ import jojo.task.TaskList;
 import jojo.ui.Ui;
 
 public class UnmarkCommand extends Command {
-    private int index;
+    private final int index;
 
     public UnmarkCommand(int index) {
         this.index = index;

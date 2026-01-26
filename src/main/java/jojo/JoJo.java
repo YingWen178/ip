@@ -1,4 +1,5 @@
 package jojo;
+
 import jojo.command.Command;
 import jojo.exception.JoJoException;
 import jojo.parser.Parser;
@@ -9,8 +10,8 @@ import jojo.ui.Ui;
 public class JoJo {
     private static final String FILE_PATH = "jojo.txt";
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
+    private TaskList tasks;
 
     public JoJo(String filePath) {
         ui = new Ui();
@@ -21,6 +22,10 @@ public class JoJo {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public static void main(String[] args) {
+        new JoJo(FILE_PATH).run();
     }
 
     public void run() {
@@ -43,10 +48,6 @@ public class JoJo {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new JoJo(FILE_PATH).run();
     }
 
 }

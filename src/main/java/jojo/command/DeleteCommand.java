@@ -7,7 +7,7 @@ import jojo.task.TaskList;
 import jojo.ui.Ui;
 
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     public DeleteCommand(int index) {
         this.index = index;
