@@ -7,7 +7,7 @@ import jojo.task.TaskList;
 import jojo.ui.Ui;
 
 public class DeleteCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Creates a command to delete the task at the specified index.

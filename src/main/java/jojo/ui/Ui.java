@@ -1,8 +1,8 @@
 package jojo.ui;
 
-import jojo.task.Task;
-
 import java.util.Scanner;
+
+import jojo.task.Task;
 
 /**
  * Handles the user interface interactions of the application.

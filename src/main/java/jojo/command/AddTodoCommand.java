@@ -9,15 +9,15 @@ import jojo.ui.Ui;
  * Represents a command to add a new Todo task.
  */
 public class AddTodoCommand extends Command {
-    private String desc;
+    private final String description;
 
     /**
      * Creates a command to add a Todo task.
      *
-     * @param desc The description of the todo.
+     * @param description The description of the todo.
      */
-    public AddTodoCommand(String desc) {
-        this.desc = desc;
+    public AddTodoCommand(String description) {
+        this.description = description;
     }
 
     /**
@@ -30,7 +30,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Todo t = new Todo(desc);
+        Todo t = new Todo(description);
         tasks.add(t);
         ui.showAddedTask(t, tasks.size());
         storage.save(tasks);

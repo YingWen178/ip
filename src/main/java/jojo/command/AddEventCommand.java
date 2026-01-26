@@ -9,19 +9,19 @@ import jojo.ui.Ui;
  * Represents a command to add a new Event task.
  */
 public class AddEventCommand extends Command {
-    private String desc;
-    private String from;
-    private String to;
+    private final String description;
+    private final String from;
+    private final String to;
 
     /**
      * Creates a command to add an Event task.
      *
-     * @param desc The description of the event.
+     * @param description The description of the event.
      * @param from The start time/date of the event.
      * @param to   The end time/date of the event.
      */
-    public AddEventCommand(String desc, String from, String to) {
-        this.desc = desc;
+    public AddEventCommand(String description, String from, String to) {
+        this.description = description;
         this.from = from;
         this.to = to;
     }
@@ -36,7 +36,7 @@ public class AddEventCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Event e = new Event(desc, from, to);
+        Event e = new Event(description, from, to);
         tasks.add(e);
         ui.showAddedTask(e, tasks.size());
         storage.save(tasks);
@@ -54,9 +54,8 @@ public class AddEventCommand extends Command {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof AddEventCommand) {
-            AddEventCommand other = (AddEventCommand) obj;
-            return this.desc.equals(other.desc)
+        if (obj instanceof AddEventCommand other) {
+            return this.description.equals(other.description)
                     && this.from.equals(other.from)
                     && this.to.equals(other.to);
         }

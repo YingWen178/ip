@@ -9,17 +9,17 @@ import jojo.ui.Ui;
  * Represents a command to add a new Deadline task.
  */
 public class AddDeadlineCommand extends Command {
-    private String desc;
-    private String by;
+    private final String description;
+    private final String by;
 
     /**
      * Creates a command to add a Deadline task.
      *
-     * @param desc The description of the deadline task.
+     * @param description The description of the deadline task.
      * @param by   The date by which the task must be completed (yyyy-mm-dd).
      */
-    public AddDeadlineCommand(String desc, String by) {
-        this.desc = desc;
+    public AddDeadlineCommand(String description, String by) {
+        this.description = description;
         this.by = by;
     }
 
@@ -33,7 +33,7 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Deadline d = new Deadline(desc, by);
+        Deadline d = new Deadline(description, by);
         tasks.add(d);
         ui.showAddedTask(d, tasks.size());
         storage.save(tasks);
@@ -51,9 +51,8 @@ public class AddDeadlineCommand extends Command {
         if (this == obj) {
             return true;
         }
-        if (obj instanceof AddDeadlineCommand) {
-            AddDeadlineCommand other = (AddDeadlineCommand) obj;
-            return this.desc.equals(other.desc) && this.by.equals(other.by);
+        if (obj instanceof AddDeadlineCommand other) {
+            return this.description.equals(other.description) && this.by.equals(other.by);
         }
         return false;
     }

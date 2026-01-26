@@ -1,11 +1,22 @@
 package jojo;
 
-import jojo.command.*;
-import jojo.exception.JoJoException;
-import jojo.parser.Parser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import jojo.command.AddDeadlineCommand;
+import jojo.command.AddEventCommand;
+import jojo.command.AddTodoCommand;
+import jojo.command.Command;
+import jojo.command.DeleteCommand;
+import jojo.command.ExitCommand;
+import jojo.command.ListCommand;
+import jojo.command.MarkCommand;
+import jojo.command.UnmarkCommand;
+import jojo.exception.JoJoException;
+import jojo.parser.Parser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 

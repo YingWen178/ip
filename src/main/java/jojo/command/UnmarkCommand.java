@@ -9,7 +9,7 @@ import jojo.ui.Ui;
  * Represents a command to mark a previously completed task as not done.
  */
 public class UnmarkCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Creates a command to unmark the task at the specified index.

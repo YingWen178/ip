@@ -9,7 +9,7 @@ import jojo.ui.Ui;
  * Represents a command to mark a task as done.
  */
 public class MarkCommand extends Command {
-    private int index;
+    private final int index;
 
     /**
      * Creates a command to mark the task at the specified index.
