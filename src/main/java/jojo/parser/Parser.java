@@ -76,7 +76,7 @@ public class Parser {
             return new FindCommand(arguments.trim());
 
         default:
-                throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
+            throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
         }
     }
 

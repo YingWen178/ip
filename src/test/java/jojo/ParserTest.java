@@ -1,5 +1,9 @@
 package jojo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 import jojo.command.AddDeadlineCommand;
@@ -13,10 +17,6 @@ import jojo.command.MarkCommand;
 import jojo.command.UnmarkCommand;
 import jojo.exception.JoJoException;
 import jojo.parser.Parser;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
