@@ -6,6 +6,7 @@ import jojo.command.AddTodoCommand;
 import jojo.command.Command;
 import jojo.command.DeleteCommand;
 import jojo.command.ExitCommand;
+import jojo.command.FindCommand;
 import jojo.command.ListCommand;
 import jojo.command.MarkCommand;
 import jojo.command.UnmarkCommand;
@@ -67,6 +68,12 @@ public class Parser {
                 throw new JoJoException(" OOPS!!! Add a task number after 'delete'.");
             }
             return new DeleteCommand(parseIndex(arguments));
+
+        case "FIND":
+            if (arguments.isEmpty()) {
+                throw new JoJoException(" OOPS!!! Add a keyword after 'find'.");
+            }
+            return new FindCommand(arguments.trim());
 
         default:
             throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
