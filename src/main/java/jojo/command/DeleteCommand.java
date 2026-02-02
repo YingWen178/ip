@@ -6,6 +6,9 @@ import jojo.task.Task;
 import jojo.task.TaskList;
 import jojo.ui.Ui;
 
+/**
+ * Represents a command to delete a task.
+ */
 public class DeleteCommand extends Command {
     private final int index;
 

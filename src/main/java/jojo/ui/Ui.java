@@ -83,6 +83,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Displays found tasks in the list if tasks matching the keyword are found.
+     */
     public void showFoundTasks(java.util.ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
             System.out.println(" No matching tasks found.");

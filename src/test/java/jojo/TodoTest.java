@@ -1,10 +1,10 @@
 package jojo;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import jojo.task.Todo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
 

@@ -37,7 +37,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_markCommand_missingIndex_exceptionThrown() {
+    public void parse_mark_invalidIndex() {
         try {
             Parser.parse("mark notANumber");
             fail();
@@ -57,17 +57,19 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_todoCommand_emptyDescription_exceptionThrown() {
+    public void parse_todo_emptyDescription() {
         try {
             Parser.parse("todo");
             fail();
         } catch (JoJoException e) {
-            assertEquals(" OOPS!!! The description of a todo cannot be empty, add a space after todo follow by the task.", e.getMessage());
+            String expected = " OOPS!!! The description of a todo cannot be empty, "
+                    + "add a space after todo follow by the task.";
+            assertEquals(expected, e.getMessage());
         }
     }
 
     @Test
-    public void parse_eventCommand_withSpaces_trimmed() throws JoJoException {
+    public void parse_event_trimmedSpaces() throws JoJoException {
         Command actual = Parser.parse("event    project meeting    /from Mon 2pm /to 4pm");
 
         Command expected = new AddEventCommand("project meeting", "Mon 2pm", "4pm");
@@ -81,7 +83,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deadlineCommand_invalidFormat_exceptionThrown() {
+    public void parse_deadline_invalidFormat() {
         try {
             Parser.parse("deadline return book");
             fail();
@@ -91,7 +93,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deadlineCommand_correctValues() throws JoJoException {
+    public void parse_deadline_correctValues() throws JoJoException {
         Command actual = Parser.parse("deadline return book /by 2024-01-01");
 
         Command expected = new AddDeadlineCommand("return book", "2024-01-01");
@@ -105,7 +107,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_eventCommand_invalidFormat_exceptionThrown() {
+    public void parse_event_invalidFormat() {
         try {
             Parser.parse("event meeting /from 2pm");
             fail();
@@ -115,7 +117,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_eventCommand_correctValues() throws JoJoException {
+    public void parse_event_correctValues() throws JoJoException {
         Command actual = Parser.parse("event project meeting /from Mon 2pm /to 4pm");
 
         Command expected = new AddEventCommand("project meeting", "Mon 2pm", "4pm");
@@ -129,7 +131,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deleteCommand_emptyArgs_exceptionThrown() {
+    public void parse_delete_emptyArgs() {
         try {
             Parser.parse("delete");
             fail();
@@ -139,12 +141,14 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_unknownCommand_exceptionThrown() {
+    public void parse_unknownCommand_exception() {
         try {
             Parser.parse("unknow command");
             fail();
         } catch (JoJoException e) {
-            assertEquals(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye.", e.getMessage());
+            String expected = " OOPS!!! I'm sorry, but I don't know what that means :-( "
+                    + "you can use command list/mark/unmark/todo/deadline/event/delete/bye.";
+            assertEquals(expected, e.getMessage());
         }
     }
 }

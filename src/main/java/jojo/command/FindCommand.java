@@ -1,10 +1,11 @@
 package jojo.command;
 
+import java.util.ArrayList;
+
 import jojo.storage.Storage;
 import jojo.task.Task;
 import jojo.task.TaskList;
 import jojo.ui.Ui;
-import java.util.ArrayList;
 
 /**
  * Represents a command to find tasks by a keyword.

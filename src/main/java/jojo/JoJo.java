@@ -7,12 +7,22 @@ import jojo.storage.Storage;
 import jojo.task.TaskList;
 import jojo.ui.Ui;
 
+/**
+ * Represents the main entry point for the JoJo task management application.
+ * JoJo is a personal assistant chatbot that helps users keep track of various tasks.
+ */
 public class JoJo {
     private static final String FILE_PATH = "jojo.txt";
     private final Storage storage;
     private final Ui ui;
     private TaskList tasks;
 
+    /**
+     * Initializes a new JoJo instance with the specified file path for data storage.
+     * If the storage file cannot be loaded, a new empty task list is initialized.
+     *
+     * @param filePath The path to the file where tasks are saved and loaded from.
+     */
     public JoJo(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,10 +34,20 @@ public class JoJo {
         }
     }
 
+    /**
+     * The main method that serves as the starting point of the application.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         new JoJo(FILE_PATH).run();
     }
 
+    /**
+     * Starts the application loop.
+     * Reads user commands, parses them, and executes the corresponding actions
+     * until an exit command is received.
+     */
     public void run() {
         ui.showHello();
         boolean isExit = false;

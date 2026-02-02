@@ -44,7 +44,8 @@ public class Parser {
 
         case "TODO":
             if (arguments.isEmpty()) {
-                throw new JoJoException(" OOPS!!! The description of a todo cannot be empty, add a space after todo follow by the task.");
+                throw new JoJoException(" OOPS!!! The description of a todo cannot be empty, "
+                        + "add a space after todo follow by the task.");
             }
             return new AddTodoCommand(arguments);
 
@@ -76,7 +77,8 @@ public class Parser {
             return new FindCommand(arguments.trim());
 
         default:
-            throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
+            throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( "
+                    + "you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
         }
     }
 
