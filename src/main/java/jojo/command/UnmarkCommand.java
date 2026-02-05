@@ -30,9 +30,9 @@ public class UnmarkCommand extends Command {
      * @throws JoJoException If the index provided is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
         tasks.unmark(index);
-        System.out.println(" OK, I've marked this task as not done yet:\n   " + tasks.get(index));
         storage.save(tasks);
+        return ui.showUnmarkedTask(tasks.get(index));
     }
 }

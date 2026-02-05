@@ -16,9 +16,10 @@ public abstract class Command {
      * @param tasks   The list of tasks to operate on.
      * @param ui      The UI to interact with the user.
      * @param storage The storage to save/load data.
+     * @return A message describing the result of the execution.
      * @throws JoJoException If an error occurs during execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException;
 
     /**
      * Checks if this command terminates the application.

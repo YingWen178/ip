@@ -35,11 +35,11 @@ public class AddEventCommand extends Command {
      * @param storage The storage handler.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Event e = new Event(description, from, to);
         tasks.add(e);
-        ui.showAddedTask(e, tasks.size());
         storage.save(tasks);
+        return ui.showAddedTask(e, tasks.size());
     }
 
     /**

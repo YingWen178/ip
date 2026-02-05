@@ -29,10 +29,10 @@ public class AddTodoCommand extends Command {
      * @param storage The storage handler.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Todo t = new Todo(description);
         tasks.add(t);
-        ui.showAddedTask(t, tasks.size());
         storage.save(tasks);
+        return ui.showAddedTask(t, tasks.size());
     }
 }

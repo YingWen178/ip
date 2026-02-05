@@ -20,39 +20,35 @@ public class Ui {
     }
 
     /**
-     * Displays the welcome message and a horizontal line to the user.
+     * Returns the welcome message and a horizontal line to the user.
      */
-    public void showHello() {
-        System.out.println(horizontalLine);
-        System.out.println(" Hello! I'm JoJo");
-        System.out.println(" What can I do for you?");
-        System.out.println(horizontalLine);
+    public String showHello() {
+        return horizontalLine + "\n Hello! I'm JoJo\n What can I do for you?\n" + horizontalLine;
     }
 
     /**
-     * Displays the goodbye message when the user exits the application.
+     * Returns the goodbye message when the user exits the application.
      */
-    public void showGoodbye() {
-        System.out.println(" Bye. Hope to see you again soon!");
+    public String showGoodbye() {
+        return " Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints a horizontal divider line to the console.
+     * Returns a horizontal divider line.
      */
-    public void showLine() {
-        System.out.println(horizontalLine);
+    public String showLine() {
+        return horizontalLine;
     }
 
     /**
-     * Displays a confirmation message after a task has been successfully added.
+     * Returns a confirmation message after a task has been successfully added.
      *
      * @param task       The task that was added to the list.
      * @param totalTasks The total number of tasks currently in the list.
      */
-    public void showAddedTask(Task task, int totalTasks) {
-        System.out.println(" Got it. I've added this task:");
-        System.out.println("   " + task);
-        System.out.println(" Now you have " + totalTasks + " tasks in the list.");
+    public String showAddedTask(Task task, int totalTasks) {
+        return " Got it. I've added this task:\n   " + task
+                + "\n Now you have " + totalTasks + " tasks in the list.";
     }
 
     /**
@@ -65,35 +61,67 @@ public class Ui {
     }
 
     /**
-     * Prints the error message to the console.
+     * Returns the error message.
      *
      * @param msg The error message to be displayed.
      */
-    public void showErr(String msg) {
-        System.out.println(msg);
+    public String showErr(String msg) {
+        return msg;
     }
 
     /**
-     * Displays an error message indicating that the storage file could not be loaded
+     * Returns an error message indicating that the storage file could not be loaded
      * and a new file has been created.
      */
-    public void showLoadingError() {
-        showLine();
-        System.out.println(" No file found. Created new file: jojo.txt");
-        showLine();
+    public String showLoadingError() {
+        return horizontalLine + "\n No file found. Created new file: jojo.txt\n" + horizontalLine;
     }
 
     /**
-     * Displays found tasks in the list if tasks matching the keyword are found.
+     * Returns found tasks in the list if tasks matching the keyword are found.
      */
-    public void showFoundTasks(java.util.ArrayList<Task> tasks) {
+    public String showFoundTasks(java.util.ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            System.out.println(" No matching tasks found.");
+            return " No matching tasks found.";
         } else {
-            System.out.println(" Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder(" Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.println(" " + (i + 1) + "." + tasks.get(i));
+                sb.append("\n ").append(i + 1).append(".").append(tasks.get(i));
             }
+            return sb.toString();
         }
+    }
+
+    /**
+     * Returns the list of tasks.
+     */
+    public String showTaskList(jojo.task.TaskList tasks) {
+        StringBuilder sb = new StringBuilder(" Here are the tasks in your list:");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append("\n ").append(i + 1).append(". ").append(tasks.get(i));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns a message after a task has been successfully deleted.
+     */
+    public String showDeletedTask(Task task, int totalTasks) {
+        return " Noted. I've removed this task:\n   " + task
+                + "\n Now you have " + totalTasks + " tasks in the list.";
+    }
+
+    /**
+     * Returns a message after a task has been successfully marked.
+     */
+    public String showMarkedTask(Task task) {
+        return " Nice! I've marked this task as done:\n   " + task;
+    }
+
+    /**
+     * Returns a message after a task has been successfully unmarked.
+     */
+    public String showUnmarkedTask(Task task) {
+        return " OK, I've marked this task as not done yet:\n   " + task;
     }
 }

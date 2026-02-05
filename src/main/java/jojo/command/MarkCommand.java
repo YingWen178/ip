@@ -29,9 +29,9 @@ public class MarkCommand extends Command {
      * @throws JoJoException If the index is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
         tasks.mark(index);
-        System.out.println(" Nice! I've marked this task as done:\n   " + tasks.get(index));
         storage.save(tasks);
+        return ui.showMarkedTask(tasks.get(index));
     }
 }

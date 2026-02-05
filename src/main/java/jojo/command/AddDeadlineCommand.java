@@ -32,11 +32,11 @@ public class AddDeadlineCommand extends Command {
      * @param storage The storage handler.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Deadline d = new Deadline(description, by);
         tasks.add(d);
-        ui.showAddedTask(d, tasks.size());
         storage.save(tasks);
+        return ui.showAddedTask(d, tasks.size());
     }
 
     /**

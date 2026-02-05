@@ -29,8 +29,40 @@ public class JoJo {
         try {
             tasks = new TaskList(storage.load());
         } catch (java.io.IOException e) {
-            ui.showLoadingError();
+            System.out.println(ui.showLoadingError());
             tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Generates a response to user input.
+     *
+     * @param input The user input string.
+     * @return The response message from JoJo.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (JoJoException e) {
+            return ui.showErr(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            return ui.showErr(" OOPS!!! That task number doesn't exist in your list.");
+        }
+    }
+
+    /**
+     * Checks if the given input is an exit command.
+     *
+     * @param input The user input string.
+     * @return True if the command is an exit command, false otherwise.
+     */
+    public boolean isExit(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.isExit();
+        } catch (JoJoException e) {
+            return false;
         }
     }
 
@@ -49,23 +81,24 @@ public class JoJo {
      * until an exit command is received.
      */
     public void run() {
-        ui.showHello();
+        System.out.println(ui.showHello());
         boolean isExit = false;
 
         while (!isExit) {
             try {
                 String fullCommand = ui.readCmd();
-                ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String response = c.execute(tasks, ui, storage);
+                System.out.println(ui.showLine());
+                System.out.println(response);
 
                 isExit = c.isExit();
             } catch (JoJoException e) {
-                ui.showErr(e.getMessage());
+                System.out.println(ui.showErr(e.getMessage()));
             } catch (IndexOutOfBoundsException e) {
-                ui.showErr(" OOPS!!! That task number doesn't exist in your list.");
+                System.out.println(ui.showErr(" OOPS!!! That task number doesn't exist in your list."));
             } finally {
-                ui.showLine();
+                System.out.println(ui.showLine());
             }
         }
     }

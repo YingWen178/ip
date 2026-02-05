@@ -30,11 +30,9 @@ public class DeleteCommand extends Command {
      * @throws JoJoException If the index is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JoJoException {
         Task removedTask = tasks.remove(index);
-        System.out.println(" Noted. I've removed this task:");
-        System.out.println("   " + removedTask);
-        System.out.println(" Now you have " + tasks.size() + " tasks in the list.");
         storage.save(tasks);
+        return ui.showDeletedTask(removedTask, tasks.size());
     }
 }
