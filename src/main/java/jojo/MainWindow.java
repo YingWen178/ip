@@ -25,12 +25,20 @@ public class MainWindow extends AnchorPane {
 
     private JoJo jojo;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image jojoImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image jojoImage = new Image(this.getClass().getResourceAsStream("/images/JoJo.png"));
 
+    /**
+     * Initializes the controller. Binds the scroll pane to the dialog container's height
+     * and adds a welcome message from JoJo.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getJoJoDialog("YARE YARE DAZE... I am JoJo. What do you want?", jojoImage)
+        );
     }
 
     /**
