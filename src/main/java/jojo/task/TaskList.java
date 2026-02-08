@@ -22,6 +22,7 @@ public class TaskList {
      * @param tasks The ArrayList of tasks to load.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Initial task list should not be null";
         this.tasks = tasks;
     }
 
@@ -31,6 +32,7 @@ public class TaskList {
      * @param task The task object to be added.
      */
     public void add(Task task) {
+        assert task != null : "Cannot add a null task";
         tasks.add(task);
     }
 
@@ -42,6 +44,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid.
      */
     public Task remove(int index) throws IndexOutOfBoundsException {
+        assert index >= 0 : "Index should be non-negative";
         return tasks.remove(index);
     }
 
@@ -52,6 +55,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid.
      */
     public void mark(int index) throws IndexOutOfBoundsException {
+        assert index >= 0 : "Index should be non-negative";
         tasks.get(index).markAsDone();
     }
 
@@ -62,6 +66,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid.
      */
     public void unmark(int index) throws IndexOutOfBoundsException {
+        assert index >= 0 : "Index should be non-negative";
         tasks.get(index).unmark();
     }
 
@@ -71,6 +76,7 @@ public class TaskList {
      * @return The total count of tasks.
      */
     public int size() {
+        assert tasks != null : "Internal tasks list should not be null";
         return tasks.size();
     }
 
@@ -82,6 +88,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid.
      */
     public Task get(int index) throws IndexOutOfBoundsException {
+        assert index >= 0 : "Index should be non-negative";
         return tasks.get(index);
     }
 
@@ -91,6 +98,7 @@ public class TaskList {
      * @return The ArrayList containing all tasks.
      */
     public ArrayList<Task> getAll() {
+        assert tasks != null : "Internal tasks list should not be null";
         return tasks;
     }
 
