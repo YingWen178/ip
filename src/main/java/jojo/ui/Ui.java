@@ -9,7 +9,18 @@ import jojo.task.Task;
  * Responsible for reading user input and displaying messages to the console.
  */
 public class Ui {
-    private final String horizontalLine = "____________________________________________________________";
+    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String WELCOME_MESSAGE = " Hello! I'm JoJo\n What can I do for you?";
+    private static final String GOODBYE_MESSAGE = " Bye. Hope to see you again soon!";
+    private static final String TASK_ADDED_MSG = " Got it. I've added this task:";
+    private static final String TASK_DELETED_MSG = " Noted. I've removed this task:";
+    private static final String TASK_MARKED_MSG = " Nice! I've marked this task as done:";
+    private static final String TASK_UNMARKED_MSG = " OK, I've marked this task as not done yet:";
+    private static final String LOADING_ERROR_MSG = " No file found. Created new file: jojo.txt";
+    private static final String MATCHING_TASKS_MSG = " Here are the matching tasks in your list:";
+    private static final String NO_MATCHING_TASKS_MSG = " No matching tasks found.";
+    private static final String LIST_TASKS_MSG = " Here are the tasks in your list:";
+
     private final Scanner scanner;
 
     /**
@@ -23,21 +34,21 @@ public class Ui {
      * Returns the welcome message and a horizontal line to the user.
      */
     public String showHello() {
-        return horizontalLine + "\n Hello! I'm JoJo\n What can I do for you?\n" + horizontalLine;
+        return HORIZONTAL_LINE + "\n" + WELCOME_MESSAGE + "\n" + HORIZONTAL_LINE;
     }
 
     /**
      * Returns the goodbye message when the user exits the application.
      */
     public String showGoodbye() {
-        return " Bye. Hope to see you again soon!";
+        return GOODBYE_MESSAGE;
     }
 
     /**
      * Returns a horizontal divider line.
      */
     public String showLine() {
-        return horizontalLine;
+        return HORIZONTAL_LINE;
     }
 
     /**
@@ -47,7 +58,7 @@ public class Ui {
      * @param totalTasks The total number of tasks currently in the list.
      */
     public String showAddedTask(Task task, int totalTasks) {
-        return " Got it. I've added this task:\n   " + task
+        return TASK_ADDED_MSG + "\n   " + task
                 + "\n Now you have " + totalTasks + " tasks in the list.";
     }
 
@@ -74,7 +85,7 @@ public class Ui {
      * and a new file has been created.
      */
     public String showLoadingError() {
-        return horizontalLine + "\n No file found. Created new file: jojo.txt\n" + horizontalLine;
+        return HORIZONTAL_LINE + "\n" + LOADING_ERROR_MSG + "\n" + HORIZONTAL_LINE;
     }
 
     /**
@@ -82,9 +93,9 @@ public class Ui {
      */
     public String showFoundTasks(java.util.ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            return " No matching tasks found.";
+            return NO_MATCHING_TASKS_MSG;
         } else {
-            StringBuilder sb = new StringBuilder(" Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder(MATCHING_TASKS_MSG);
             for (int i = 0; i < tasks.size(); i++) {
                 sb.append("\n ").append(i + 1).append(".").append(tasks.get(i));
             }
@@ -96,7 +107,7 @@ public class Ui {
      * Returns the list of tasks.
      */
     public String showTaskList(jojo.task.TaskList tasks) {
-        StringBuilder sb = new StringBuilder(" Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder(LIST_TASKS_MSG);
         for (int i = 0; i < tasks.size(); i++) {
             sb.append("\n ").append(i + 1).append(". ").append(tasks.get(i));
         }
@@ -107,7 +118,7 @@ public class Ui {
      * Returns a message after a task has been successfully deleted.
      */
     public String showDeletedTask(Task task, int totalTasks) {
-        return " Noted. I've removed this task:\n   " + task
+        return TASK_DELETED_MSG + "\n   " + task
                 + "\n Now you have " + totalTasks + " tasks in the list.";
     }
 
@@ -115,13 +126,13 @@ public class Ui {
      * Returns a message after a task has been successfully marked.
      */
     public String showMarkedTask(Task task) {
-        return " Nice! I've marked this task as done:\n   " + task;
+        return TASK_MARKED_MSG + "\n   " + task;
     }
 
     /**
      * Returns a message after a task has been successfully unmarked.
      */
     public String showUnmarkedTask(Task task) {
-        return " OK, I've marked this task as not done yet:\n   " + task;
+        return TASK_UNMARKED_MSG + "\n   " + task;
     }
 }
