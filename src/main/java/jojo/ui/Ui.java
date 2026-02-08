@@ -20,6 +20,7 @@ public class Ui {
     private static final String MATCHING_TASKS_MSG = " Here are the matching tasks in your list:";
     private static final String NO_MATCHING_TASKS_MSG = " No matching tasks found.";
     private static final String LIST_TASKS_MSG = " Here are the tasks in your list:";
+    private static final String DUPLICATE_TASK_MSG = " OOPS!!! This task already exists in your list:";
 
     private final Scanner scanner;
 
@@ -134,5 +135,14 @@ public class Ui {
      */
     public String showUnmarkedTask(Task task) {
         return TASK_UNMARKED_MSG + "\n   " + task;
+    }
+
+    /**
+     * Returns a message when a duplicate task is detected.
+     *
+     * @param task The duplicate task.
+     */
+    public String showDuplicateTask(Task task) {
+        return DUPLICATE_TASK_MSG + "\n   " + task;
     }
 }

@@ -40,4 +40,20 @@ public class Deadline extends Task {
     public String toSaveString() {
         return "D | " + super.toSaveString() + " | " + by;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Deadline other) {
+            return super.equals(other) && this.by.equals(other.by);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + 31 * by.hashCode();
+    }
 }

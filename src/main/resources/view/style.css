@@ -1,0 +1,71 @@
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: #2b0040; /* Dark purple background */
+}
+
+/* ScrollPane styling */
+.scroll-pane {
+    -fx-background: transparent;
+    -fx-background-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #2b0040;
+}
+
+/* Dialog Container */
+#dialogContainer {
+    -fx-spacing: 15;
+    -fx-padding: 10;
+}
+
+/* User Dialog Bubble */
+.user-label {
+    -fx-background-color: #ffd700; /* JoJo Gold */
+    -fx-text-fill: black;
+    -fx-padding: 10;
+    -fx-background-radius: 15 15 0 15;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 2, 2);
+}
+
+/* JoJo Dialog Bubble */
+.jojo-label {
+    -fx-background-color: #9b4dff; /* JoJo Purple */
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-background-radius: 15 15 15 0;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 2, 2);
+}
+
+/* ImageView styling */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+/* Input field */
+.text-field {
+    -fx-background-color: #4a0072;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #b39ddb;
+    -fx-background-radius: 20;
+    -fx-border-color: #ffd700;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+}
+
+/* Send Button */
+.button {
+    -fx-background-color: #ffd700;
+    -fx-text-fill: #2b0040;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #ffea00;
+}

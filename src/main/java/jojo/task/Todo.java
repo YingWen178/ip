@@ -32,4 +32,20 @@ public class Todo extends Task {
     public String toSaveString() {
         return "T | " + super.toSaveString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Todo other) {
+            return super.equals(other);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + 31 * "T".hashCode();
+    }
 }

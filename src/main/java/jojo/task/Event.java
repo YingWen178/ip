@@ -39,4 +39,20 @@ public class Event extends Task {
     public String toSaveString() {
         return "E | " + super.toSaveString() + " | " + from + " | " + to;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Event other) {
+            return super.equals(other) && this.from.equals(other.from) && this.to.equals(other.to);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + 31 * (from.hashCode() + to.hashCode());
+    }
 }

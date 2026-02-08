@@ -37,6 +37,9 @@ public class AddEventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Event e = new Event(description, from, to);
+        if (tasks.contains(e)) {
+            return ui.showDuplicateTask(e);
+        }
         tasks.add(e);
         storage.save(tasks);
         return ui.showAddedTask(e, tasks.size());

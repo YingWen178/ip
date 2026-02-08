@@ -117,4 +117,14 @@ public class TaskList {
         }
         return foundTasks;
     }
+
+    /**
+     * Checks if a task already exists in the list.
+     *
+     * @param task The task to check.
+     * @return True if the task exists, false otherwise.
+     */
+    public boolean contains(Task task) {
+        return tasks.contains(task);
+    }
 }

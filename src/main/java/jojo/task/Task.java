@@ -68,4 +68,20 @@ public class Task {
     public String toSaveString() {
         return (isDone ? "1" : "0") + " | " + description;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof Task other) {
+            return this.description.equals(other.description);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return description.hashCode();
+    }
 }
