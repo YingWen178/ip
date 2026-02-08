@@ -17,6 +17,11 @@ import jojo.task.Todo;
  * Responsible for reading from and writing to the hard disk.
  */
 public class Storage {
+    private static final String TODO_TYPE = "T";
+    private static final String DEADLINE_TYPE = "D";
+    private static final String EVENT_TYPE = "E";
+    private static final String DELIMITER = " \\| ";
+
     private String filePath;
 
     /**
@@ -46,16 +51,16 @@ public class Storage {
             return list;
         }
 
-        Scanner fileScanner = new Scanner(file);
-        while (fileScanner.hasNextLine()) {
-            String line = fileScanner.nextLine();
-            if (!line.trim().isEmpty()) {
-                Task t = parseTask(line);
-                assert t != null : "parsed task should not be null for a valid line";
-                list.add(t);
+        try (Scanner fileScanner = new Scanner(file)) {
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                if (!line.trim().isEmpty()) {
+                    Task t = parseTask(line);
+                    assert t != null : "parsed task should not be null for a valid line";
+                    list.add(t);
+                }
             }
         }
-        fileScanner.close();
         return list;
     }
 
@@ -67,13 +72,11 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         assert tasks != null : "TaskList to save should not be null";
-        try {
-            FileWriter fw = new FileWriter(filePath);
+        try (FileWriter fw = new FileWriter(filePath)) {
             for (Task t : tasks.getAll()) {
                 assert t != null : "Tasks in the list should not be null";
                 fw.write(t.toSaveString() + System.lineSeparator());
             }
-            fw.close();
         } catch (IOException e) {
             System.out.println(" Error saving to file: " + e.getMessage());
         }
@@ -87,20 +90,20 @@ public class Storage {
      * @return A Task object (Todo, Deadline, or Event), or null if the type is unknown.
      */
     private Task parseTask(String line) {
-        String[] parts = line.split(" \\| ");
+        String[] parts = line.split(DELIMITER);
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
 
         Task task;
         switch (type) {
-        case "T":
+        case TODO_TYPE:
             task = new Todo(description);
             break;
-        case "D":
+        case DEADLINE_TYPE:
             task = new Deadline(description, parts[3]);
             break;
-        case "E":
+        case EVENT_TYPE:
             task = new Event(description, parts[3], parts[4]);
             break;
         default:

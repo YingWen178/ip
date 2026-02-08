@@ -103,7 +103,9 @@ public class JoJo {
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(ui.showErr(" OOPS!!! That task number doesn't exist in your list."));
             } finally {
-                System.out.println(ui.showLine());
+                if (!isExit) {
+                    System.out.println(ui.showLine());
+                }
             }
         }
     }

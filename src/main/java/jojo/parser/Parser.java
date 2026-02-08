@@ -16,6 +16,19 @@ import jojo.exception.JoJoException;
  * Parses user input into executable commands.
  */
 public class Parser {
+    private static final String BYE_CMD = "BYE";
+    private static final String LIST_CMD = "LIST";
+    private static final String MARK_CMD = "MARK";
+    private static final String UNMARK_CMD = "UNMARK";
+    private static final String TODO_CMD = "TODO";
+    private static final String DEADLINE_CMD = "DEADLINE";
+    private static final String EVENT_CMD = "EVENT";
+    private static final String DELETE_CMD = "DELETE";
+    private static final String FIND_CMD = "FIND";
+
+    private static final String BY_DELIMITER = " /by ";
+    private static final String FROM_DELIMITER = " /from ";
+    private static final String TO_DELIMITER = " /to ";
 
     /**
      * Parses the full user command and returns the corresponding Command object.
@@ -33,56 +46,67 @@ public class Parser {
         String arguments = (parts.length > 1) ? parts[1].trim() : "";
 
         switch (commandWord) {
-        case "BYE":
+        case BYE_CMD:
             return new ExitCommand();
-
-        case "LIST":
+        case LIST_CMD:
             return new ListCommand();
-
-        case "MARK":
+        case MARK_CMD:
             return new MarkCommand(parseIndex(arguments));
-
-        case "UNMARK":
+        case UNMARK_CMD:
             return new UnmarkCommand(parseIndex(arguments));
-
-        case "TODO":
-            if (arguments.isEmpty()) {
-                throw new JoJoException(" OOPS!!! The description of a todo cannot be empty, "
-                        + "add a space after todo follow by the task.");
-            }
-            return new AddTodoCommand(arguments);
-
-        case "DEADLINE":
-            if (!arguments.contains(" /by ")) {
-                throw new JoJoException(" OOPS!!! Use format: deadline [task] /by [date(yyyy-mm-dd)]");
-            }
-            String[] dParts = arguments.split(" /by ");
-            return new AddDeadlineCommand(dParts[0].trim(), dParts[1].trim());
-
-        case "EVENT":
-            if (!arguments.contains(" /from ") || !arguments.contains(" /to ")) {
-                throw new JoJoException(" OOPS!!! Use format: event [task] /from [start] /to [end]");
-            }
-            String[] eParts = arguments.split(" /from ");
-            String[] tParts = eParts[1].split(" /to ");
-            return new AddEventCommand(eParts[0].trim(), tParts[0].trim(), tParts[1].trim());
-
-        case "DELETE":
-            if (arguments.isEmpty()) {
-                throw new JoJoException(" OOPS!!! Add a task number after 'delete'.");
-            }
-            return new DeleteCommand(parseIndex(arguments));
-
-        case "FIND":
-            if (arguments.isEmpty()) {
-                throw new JoJoException(" OOPS!!! Add a keyword after 'find'.");
-            }
-            return new FindCommand(arguments.trim());
-
+        case TODO_CMD:
+            return parseTodo(arguments);
+        case DEADLINE_CMD:
+            return parseDeadline(arguments);
+        case EVENT_CMD:
+            return parseEvent(arguments);
+        case DELETE_CMD:
+            return parseDelete(arguments);
+        case FIND_CMD:
+            return parseFind(arguments);
         default:
             throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( "
                     + "you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
         }
+    }
+
+    private static Command parseTodo(String arguments) throws JoJoException {
+        if (arguments.isEmpty()) {
+            throw new JoJoException(" OOPS!!! The description of a todo cannot be empty, "
+                    + "add a space after todo follow by the task.");
+        }
+        return new AddTodoCommand(arguments);
+    }
+
+    private static Command parseDeadline(String arguments) throws JoJoException {
+        if (!arguments.contains(BY_DELIMITER)) {
+            throw new JoJoException(" OOPS!!! Use format: deadline [task] /by [date(yyyy-mm-dd)]");
+        }
+        String[] dParts = arguments.split(BY_DELIMITER);
+        return new AddDeadlineCommand(dParts[0].trim(), dParts[1].trim());
+    }
+
+    private static Command parseEvent(String arguments) throws JoJoException {
+        if (!arguments.contains(FROM_DELIMITER) || !arguments.contains(TO_DELIMITER)) {
+            throw new JoJoException(" OOPS!!! Use format: event [task] /from [start] /to [end]");
+        }
+        String[] eParts = arguments.split(FROM_DELIMITER);
+        String[] tParts = eParts[1].split(TO_DELIMITER);
+        return new AddEventCommand(eParts[0].trim(), tParts[0].trim(), tParts[1].trim());
+    }
+
+    private static Command parseDelete(String arguments) throws JoJoException {
+        if (arguments.isEmpty()) {
+            throw new JoJoException(" OOPS!!! Add a task number after 'delete'.");
+        }
+        return new DeleteCommand(parseIndex(arguments));
+    }
+
+    private static Command parseFind(String arguments) throws JoJoException {
+        if (arguments.isEmpty()) {
+            throw new JoJoException(" OOPS!!! Add a keyword after 'find'.");
+        }
+        return new FindCommand(arguments.trim());
     }
 
     /**
