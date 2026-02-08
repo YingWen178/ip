@@ -25,6 +25,7 @@ public class Storage {
      * @param filePath The file path where tasks will be stored and retrieved.
      */
     public Storage(String filePath) {
+        assert filePath != null : "filePath should not be null";
         this.filePath = filePath;
     }
 
@@ -36,6 +37,7 @@ public class Storage {
      * @throws IOException If there is an error creating or reading the file.
      */
     public ArrayList<Task> load() throws IOException {
+        assert filePath != null : "filePath should be initialized before load";
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
 
@@ -48,7 +50,9 @@ public class Storage {
         while (fileScanner.hasNextLine()) {
             String line = fileScanner.nextLine();
             if (!line.trim().isEmpty()) {
-                list.add(parseTask(line));
+                Task t = parseTask(line);
+                assert t != null : "parsed task should not be null for a valid line";
+                list.add(t);
             }
         }
         fileScanner.close();
@@ -62,9 +66,11 @@ public class Storage {
      * @param tasks The TaskList containing the tasks to save.
      */
     public void save(TaskList tasks) {
+        assert tasks != null : "TaskList to save should not be null";
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks.getAll()) {
+                assert t != null : "Tasks in the list should not be null";
                 fw.write(t.toSaveString() + System.lineSeparator());
             }
             fw.close();

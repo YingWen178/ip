@@ -25,8 +25,11 @@ public class Parser {
      * @throws JoJoException If the command format is invalid or unknown.
      */
     public static Command parse(String fullCommand) throws JoJoException {
+        assert fullCommand != null : "fullCommand should not be null";
         String[] parts = fullCommand.split(" ", 2);
+        assert parts.length > 0 : "split should return at least one part";
         String commandWord = parts[0].toUpperCase();
+        assert !commandWord.isEmpty() : "commandWord should not be empty";
         String arguments = (parts.length > 1) ? parts[1].trim() : "";
 
         switch (commandWord) {

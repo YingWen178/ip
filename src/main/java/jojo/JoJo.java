@@ -26,12 +26,15 @@ public class JoJo {
     public JoJo(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        assert ui != null : "Ui should be initialized";
+        assert storage != null : "Storage should be initialized";
         try {
             tasks = new TaskList(storage.load());
         } catch (java.io.IOException e) {
             System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
+        assert tasks != null : "TaskList should be initialized";
     }
 
     /**
@@ -41,8 +44,10 @@ public class JoJo {
      * @return The response message from JoJo.
      */
     public String getResponse(String input) {
+        assert input != null : "Input should not be null";
         try {
             Command c = Parser.parse(input);
+            assert c != null : "Parser should return a valid Command";
             return c.execute(tasks, ui, storage);
         } catch (JoJoException e) {
             return ui.showErr(e.getMessage());
