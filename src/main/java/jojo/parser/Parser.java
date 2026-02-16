@@ -65,14 +65,14 @@ public class Parser {
         case FIND_CMD:
             return parseFind(arguments);
         default:
-            throw new JoJoException(" OOPS!!! I'm sorry, but I don't know what that means :-( "
+            throw new JoJoException("NANI?! I'm sorry, but I don't know what that means :-( "
                     + "you can use command list/mark/unmark/todo/deadline/event/delete/bye.");
         }
     }
 
     private static Command parseTodo(String arguments) throws JoJoException {
         if (arguments.isEmpty()) {
-            throw new JoJoException(" OOPS!!! The description of a todo cannot be empty, "
+            throw new JoJoException("NANI?! The description of a todo cannot be empty, "
                     + "add a space after todo follow by the task.");
         }
         return new AddTodoCommand(arguments);
@@ -80,7 +80,7 @@ public class Parser {
 
     private static Command parseDeadline(String arguments) throws JoJoException {
         if (!arguments.contains(BY_DELIMITER)) {
-            throw new JoJoException(" OOPS!!! Use format: deadline [task] /by [date(yyyy-mm-dd)]");
+            throw new JoJoException("NANI?! Use format: deadline [task] /by [date(yyyy-mm-dd)]");
         }
         String[] dParts = arguments.split(BY_DELIMITER);
         return new AddDeadlineCommand(dParts[0].trim(), dParts[1].trim());
@@ -88,7 +88,7 @@ public class Parser {
 
     private static Command parseEvent(String arguments) throws JoJoException {
         if (!arguments.contains(FROM_DELIMITER) || !arguments.contains(TO_DELIMITER)) {
-            throw new JoJoException(" OOPS!!! Use format: event [task] /from [start] /to [end]");
+            throw new JoJoException("NANI?! Use format: event [task] /from [start] /to [end]");
         }
         String[] eParts = arguments.split(FROM_DELIMITER);
         String[] tParts = eParts[1].split(TO_DELIMITER);
@@ -97,14 +97,14 @@ public class Parser {
 
     private static Command parseDelete(String arguments) throws JoJoException {
         if (arguments.isEmpty()) {
-            throw new JoJoException(" OOPS!!! Add a task number after 'delete'.");
+            throw new JoJoException("NANI?! Add a task number after 'delete'.");
         }
         return new DeleteCommand(parseIndex(arguments));
     }
 
     private static Command parseFind(String arguments) throws JoJoException {
         if (arguments.isEmpty()) {
-            throw new JoJoException(" OOPS!!! Add a keyword after 'find'.");
+            throw new JoJoException("NANI?! Add a keyword after 'find'.");
         }
         return new FindCommand(arguments.trim());
     }
@@ -120,7 +120,7 @@ public class Parser {
         try {
             return Integer.parseInt(args) - 1;
         } catch (NumberFormatException e) {
-            throw new JoJoException(" OOPS!!! Please provide a valid task number.");
+            throw new JoJoException("NANI?! Please provide a valid task number.");
         }
     }
 }

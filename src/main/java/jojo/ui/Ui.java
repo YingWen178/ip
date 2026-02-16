@@ -10,17 +10,17 @@ import jojo.task.Task;
  */
 public class Ui {
     private static final String HORIZONTAL_LINE = "____________________________________________________________";
-    private static final String WELCOME_MESSAGE = " Hello! I'm JoJo\n What can I do for you?";
-    private static final String GOODBYE_MESSAGE = " Bye. Hope to see you again soon!";
-    private static final String TASK_ADDED_MSG = " Got it. I've added this task:";
-    private static final String TASK_DELETED_MSG = " Noted. I've removed this task:";
-    private static final String TASK_MARKED_MSG = " Nice! I've marked this task as done:";
-    private static final String TASK_UNMARKED_MSG = " OK, I've marked this task as not done yet:";
-    private static final String LOADING_ERROR_MSG = " No file found. Created new file: jojo.txt";
-    private static final String MATCHING_TASKS_MSG = " Here are the matching tasks in your list:";
-    private static final String NO_MATCHING_TASKS_MSG = " No matching tasks found.";
-    private static final String LIST_TASKS_MSG = " Here are the tasks in your list:";
-    private static final String DUPLICATE_TASK_MSG = " OOPS!!! This task already exists in your list:";
+    private static final String WELCOME_MESSAGE = "YARE YARE DAZE... I am JoJo.\nWhat do you want from me?";
+    private static final String GOODBYE_MESSAGE = "Arrivederci. Don't bother me again unless it's important.";
+    private static final String TASK_ADDED_MSG = "STAR PLATINUM! I've added this task to your stand:";
+    private static final String TASK_DELETED_MSG = "ERASED! This task has been removed from existence:";
+    private static final String TASK_MARKED_MSG = "YES! I AM! I've marked this task as done:";
+    private static final String TASK_UNMARKED_MSG = "MUDA MUDA MUDA! I've marked this task as not done yet:";
+    private static final String LOADING_ERROR_MSG = "Good Grief... No file found. I've created a new one: jojo.txt";
+    private static final String MATCHING_TASKS_MSG = "Hmph. Here are the tasks that match your search:";
+    private static final String NO_MATCHING_TASKS_MSG = "NANI?! No matching tasks found.";
+    private static final String LIST_TASKS_MSG = "Here is your pathetic list of tasks:";
+    private static final String DUPLICATE_TASK_MSG = "KONO DIO DA! This task already exists in your list:";
 
     private final Scanner scanner;
 
@@ -60,7 +60,7 @@ public class Ui {
      */
     public String showAddedTask(Task task, int totalTasks) {
         return TASK_ADDED_MSG + "\n   " + task
-                + "\n Now you have " + totalTasks + " tasks in the list.";
+                + "\nNow you have " + totalTasks + " tasks in the list.";
     }
 
     /**
@@ -98,7 +98,7 @@ public class Ui {
         } else {
             StringBuilder sb = new StringBuilder(MATCHING_TASKS_MSG);
             for (int i = 0; i < tasks.size(); i++) {
-                sb.append("\n ").append(i + 1).append(".").append(tasks.get(i));
+                sb.append("\n").append(i + 1).append(".").append(tasks.get(i));
             }
             return sb.toString();
         }
@@ -110,7 +110,7 @@ public class Ui {
     public String showTaskList(jojo.task.TaskList tasks) {
         StringBuilder sb = new StringBuilder(LIST_TASKS_MSG);
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append("\n ").append(i + 1).append(". ").append(tasks.get(i));
+            sb.append("\n").append(i + 1).append(". ").append(tasks.get(i));
         }
         return sb.toString();
     }
@@ -120,7 +120,7 @@ public class Ui {
      */
     public String showDeletedTask(Task task, int totalTasks) {
         return TASK_DELETED_MSG + "\n   " + task
-                + "\n Now you have " + totalTasks + " tasks in the list.";
+                + "\nNow you have " + totalTasks + " tasks in the list.";
     }
 
     /**

@@ -52,7 +52,7 @@ public class JoJo {
         } catch (JoJoException e) {
             return ui.showErr(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            return ui.showErr(" OOPS!!! That task number doesn't exist in your list.");
+            return ui.showErr("NANI?! That task number doesn't exist in your list.");
         }
     }
 
@@ -101,7 +101,7 @@ public class JoJo {
             } catch (JoJoException e) {
                 System.out.println(ui.showErr(e.getMessage()));
             } catch (IndexOutOfBoundsException e) {
-                System.out.println(ui.showErr(" OOPS!!! That task number doesn't exist in your list."));
+                System.out.println(ui.showErr("NANI?! That task number doesn't exist in your list."));
             } finally {
                 if (!isExit) {
                     System.out.println(ui.showLine());

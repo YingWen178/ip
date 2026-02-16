@@ -42,6 +42,9 @@ public class DialogBox extends HBox {
         // I used AI to help me with the Circle clipping logic for the ImageView.
         // The tool (GitHub Copilot) suggested using a Circle clip to ensure a
         // perfect circular crop regardless of the source image aspect ratio.
+        // For the new "menacing" JoJo theme, I also asked ChatGPT for advice on
+        // enhancing the CSS for a more dramatic look, which led to the use of
+        // linear gradients and stronger drop shadows in style.css.
         Circle clip = new Circle(25, 25, 25);
         displayPicture.setClip(clip);
     }

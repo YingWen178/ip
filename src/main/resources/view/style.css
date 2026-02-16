@@ -1,6 +1,6 @@
 .root {
-    -fx-font-family: "Arial";
-    -fx-background-color: #2b0040; /* Dark purple background */
+    -fx-font-family: "Arial", sans-serif;
+    -fx-background-color: #1a0026; /* Darker purple background */
 }
 
 /* ScrollPane styling */
@@ -10,7 +10,7 @@
 }
 
 .scroll-pane .viewport {
-    -fx-background-color: #2b0040;
+    -fx-background-color: #1a0026;
 }
 
 /* Dialog Container */
@@ -21,44 +21,44 @@
 
 /* User Dialog Bubble */
 .user-label {
-    -fx-background-color: #ffd700; /* JoJo Gold */
+    -fx-background-color: linear-gradient(to bottom right, #ffd700, #ff8c00); /* JoJo Gold Gradient */
     -fx-text-fill: black;
     -fx-padding: 12;
     -fx-background-radius: 20 20 0 20;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 2, 2);
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 4, 4);
     -fx-border-color: #ffaa00;
     -fx-border-radius: 20 20 0 20;
-    -fx-border-width: 1;
+    -fx-border-width: 2;
 }
 
 /* JoJo Dialog Bubble */
 .jojo-label {
-    -fx-background-color: #9b4dff; /* JoJo Purple */
+    -fx-background-color: linear-gradient(to bottom right, #9b4dff, #4a0072); /* JoJo Purple Gradient */
     -fx-text-fill: white;
     -fx-padding: 12;
     -fx-background-radius: 0 20 20 20;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 2, 2);
-    -fx-border-color: #7b2cbf;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.4), 10, 0, 0, 0); /* Gold glow for JoJo */
+    -fx-border-color: #ffd700; /* Gold border for JoJo to show dominance */
     -fx-border-radius: 0 20 20 20;
-    -fx-border-width: 1;
+    -fx-border-width: 2;
 }
 
 /* Error Dialog Bubble */
 .error-label {
-    -fx-background-color: #ff4d4d; /* Red for errors */
+    -fx-background-color: linear-gradient(to bottom right, #ff4d4d, #990000); /* Red Gradient */
     -fx-text-fill: white;
     -fx-padding: 12;
     -fx-background-radius: 0 20 20 20;
     -fx-font-weight: bold;
-    -fx-font-size: 13px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 8, 0, 0, 0);
-    -fx-border-color: #cc0000;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 12, 0, 0, 0);
+    -fx-border-color: #000000; /* Black border for a dramatic effect */
     -fx-border-radius: 0 20 20 20;
-    -fx-border-width: 2;
+    -fx-border-width: 3;
 }
 
 /* ImageView styling */

@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty().subtract(15));
         dialogContainer.getChildren().addAll(
-                DialogBox.getJoJoDialog("YARE YARE DAZE... I am JoJo. What do you want?", jojoImage)
+                DialogBox.getJoJoDialog("YARE YARE DAZE... I am JoJo. What do you want from me?", jojoImage)
         );
     }
 
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = jojo.getResponse(input);
-        boolean isError = response.contains("OOPS!!!");
+        boolean isError = response.contains("NANI?!");
         if (isError) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

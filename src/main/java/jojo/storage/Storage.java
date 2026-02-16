@@ -78,7 +78,7 @@ public class Storage {
                 fw.write(t.toSaveString() + System.lineSeparator());
             }
         } catch (IOException e) {
-            System.out.println(" Error saving to file: " + e.getMessage());
+            System.out.println("Error saving to file: " + e.getMessage());
         }
     }
 

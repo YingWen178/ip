@@ -42,7 +42,7 @@ public class ParserTest {
             Parser.parse("mark notANumber");
             fail();
         } catch (JoJoException e) {
-            assertEquals(" OOPS!!! Please provide a valid task number.", e.getMessage());
+            assertEquals("NANI?! Please provide a valid task number.", e.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class ParserTest {
             Parser.parse("todo");
             fail();
         } catch (JoJoException e) {
-            String expected = " OOPS!!! The description of a todo cannot be empty, "
+            String expected = "NANI?! The description of a todo cannot be empty, "
                     + "add a space after todo follow by the task.";
             assertEquals(expected, e.getMessage());
         }
@@ -88,7 +88,7 @@ public class ParserTest {
             Parser.parse("deadline return book");
             fail();
         } catch (JoJoException e) {
-            assertEquals(" OOPS!!! Use format: deadline [task] /by [date(yyyy-mm-dd)]", e.getMessage());
+            assertEquals("NANI?! Use format: deadline [task] /by [date(yyyy-mm-dd)]", e.getMessage());
         }
     }
 
@@ -112,7 +112,7 @@ public class ParserTest {
             Parser.parse("event meeting /from 2pm");
             fail();
         } catch (JoJoException e) {
-            assertEquals(" OOPS!!! Use format: event [task] /from [start] /to [end]", e.getMessage());
+            assertEquals("NANI?! Use format: event [task] /from [start] /to [end]", e.getMessage());
         }
     }
 
@@ -136,7 +136,7 @@ public class ParserTest {
             Parser.parse("delete");
             fail();
         } catch (JoJoException e) {
-            assertEquals(" OOPS!!! Add a task number after 'delete'.", e.getMessage());
+            assertEquals("NANI?! Add a task number after 'delete'.", e.getMessage());
         }
     }
 
@@ -146,7 +146,7 @@ public class ParserTest {
             Parser.parse("unknow command");
             fail();
         } catch (JoJoException e) {
-            String expected = " OOPS!!! I'm sorry, but I don't know what that means :-( "
+            String expected = "NANI?! I'm sorry, but I don't know what that means :-( "
                     + "you can use command list/mark/unmark/todo/deadline/event/delete/bye.";
             assertEquals(expected, e.getMessage());
         }
