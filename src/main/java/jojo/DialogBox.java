@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * Represents a dialog box consisting of an ImageView to represent the speaker's face
@@ -36,6 +37,13 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        // Circular profile picture
+        // I used AI to help me with the Circle clipping logic for the ImageView.
+        // The tool (GitHub Copilot) suggested using a Circle clip to ensure a
+        // perfect circular crop regardless of the source image aspect ratio.
+        Circle clip = new Circle(25, 25, 25);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -46,11 +54,14 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        // Space between image and text when flipped
+        setSpacing(10);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.dialog.getStyleClass().add("user-label");
+        db.setSpacing(10);
         return db;
     }
 
@@ -58,6 +69,13 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.flip();
         db.dialog.getStyleClass().add("jojo-label");
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.flip();
+        db.dialog.getStyleClass().add("error-label");
         return db;
     }
 }

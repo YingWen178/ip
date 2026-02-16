@@ -19,9 +19,9 @@
             </padding>
             <maxWidth><Double fx:constant="MAX_VALUE" /></maxWidth>
         </Label>
-        <ImageView fx:id="displayPicture" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view" />
+        <ImageView fx:id="displayPicture" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view" />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
     </padding>
 </fx:root>
