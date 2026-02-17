@@ -10,14 +10,13 @@ import org.junit.jupiter.api.Test;
 import jojo.command.AddDeadlineCommand;
 import jojo.command.AddEventCommand;
 import jojo.command.AddTodoCommand;
+import jojo.exception.JoJoException;
 import jojo.storage.Storage;
 import jojo.task.Deadline;
 import jojo.task.Event;
 import jojo.task.TaskList;
 import jojo.task.Todo;
 import jojo.ui.Ui;
-
-import jojo.exception.JoJoException;
 
 public class DuplicateTaskTest {
 
