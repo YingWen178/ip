@@ -70,9 +70,9 @@ public class ParserTest {
 
     @Test
     public void parse_event_trimmedSpaces() throws JoJoException {
-        Command actual = Parser.parse("event    project meeting    /from Mon 2pm /to 4pm");
+        Command actual = Parser.parse("event    project meeting    /from 2026-02-10 1400 /to 2026-02-10 1600");
 
-        Command expected = new AddEventCommand("project meeting", "Mon 2pm", "4pm");
+        Command expected = new AddEventCommand("project meeting", "2026-02-10 1400", "2026-02-10 1600");
 
         assertEquals(expected, actual);
     }
@@ -103,7 +103,8 @@ public class ParserTest {
 
     @Test
     public void parse_eventCommand_success() throws JoJoException {
-        assertInstanceOf(AddEventCommand.class, Parser.parse("event meeting /from 2pm /to 4pm"));
+        assertInstanceOf(AddEventCommand.class,
+                Parser.parse("event meeting /from 2026-02-10 1400 /to 2026-02-10 1600"));
     }
 
     @Test
@@ -118,9 +119,9 @@ public class ParserTest {
 
     @Test
     public void parse_event_correctValues() throws JoJoException {
-        Command actual = Parser.parse("event project meeting /from Mon 2pm /to 4pm");
+        Command actual = Parser.parse("event project meeting /from 2026-02-10 1400 /to 2026-02-10 1600");
 
-        Command expected = new AddEventCommand("project meeting", "Mon 2pm", "4pm");
+        Command expected = new AddEventCommand("project meeting", "2026-02-10 1400", "2026-02-10 1600");
 
         assertEquals(expected, actual);
     }

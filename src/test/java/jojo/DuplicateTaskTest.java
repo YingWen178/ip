@@ -17,6 +17,8 @@ import jojo.task.TaskList;
 import jojo.task.Todo;
 import jojo.ui.Ui;
 
+import jojo.exception.JoJoException;
+
 public class DuplicateTaskTest {
 
     @Test
@@ -39,7 +41,7 @@ public class DuplicateTaskTest {
     }
 
     @Test
-    public void execute_duplicateDeadline_returnsErrorMessage() {
+    public void execute_duplicateDeadline_returnsErrorMessage() throws JoJoException {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage("test_jojo.txt");
@@ -58,15 +60,15 @@ public class DuplicateTaskTest {
     }
 
     @Test
-    public void execute_duplicateEvent_returnsErrorMessage() {
+    public void execute_duplicateEvent_returnsErrorMessage() throws JoJoException {
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage("test_jojo.txt");
 
-        Event event = new Event("concert", "2pm", "4pm");
+        Event event = new Event("concert", "2026-02-10 1800", "2026-02-10 2000");
         tasks.add(event);
 
-        AddEventCommand cmd = new AddEventCommand("concert", "2pm", "4pm");
+        AddEventCommand cmd = new AddEventCommand("concert", "2026-02-10 1800", "2026-02-10 2000");
         String result = cmd.execute(tasks, ui, storage);
 
         assertTrue(result.contains("already exists"), "Result should contain duplicate error message");

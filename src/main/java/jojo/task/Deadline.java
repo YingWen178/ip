@@ -2,6 +2,9 @@ package jojo.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import jojo.exception.JoJoException;
 
 /**
  * Represents a task with a specific deadline.
@@ -15,10 +18,15 @@ public class Deadline extends Task {
      *
      * @param description The task description.
      * @param by The deadline date in yyyy-mm-dd format.
+     * @throws JoJoException If the date format is invalid.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws JoJoException {
         super(description);
-        this.by = LocalDate.parse(by);
+        try {
+            this.by = LocalDate.parse(by);
+        } catch (DateTimeParseException e) {
+            throw new JoJoException("NANI?! Please use yyyy-mm-dd format for the date (e.g., 2023-12-25).");
+        }
     }
 
     /**

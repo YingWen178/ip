@@ -19,7 +19,7 @@ public class Ui {
     private static final String LOADING_ERROR_MSG = "Good Grief... No file found. I've created a new one: jojo.txt";
     private static final String MATCHING_TASKS_MSG = "Hmph. Here are the tasks that match your search:";
     private static final String NO_MATCHING_TASKS_MSG = "NANI?! No matching tasks found.";
-    private static final String LIST_TASKS_MSG = "Here is your pathetic list of tasks:";
+    private static final String LIST_TASKS_MSG = "Here is your list of tasks:";
     private static final String DUPLICATE_TASK_MSG = "KONO DIO DA! This task already exists in your list:";
 
     private final Scanner scanner;

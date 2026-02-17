@@ -39,7 +39,11 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws JoJoException {
         assert fullCommand != null : "fullCommand should not be null";
-        String[] parts = fullCommand.split(" ", 2);
+        String trimmedCommand = fullCommand.trim();
+        if (trimmedCommand.isEmpty()) {
+            throw new JoJoException("NANI?! You didn't enter anything!");
+        }
+        String[] parts = trimmedCommand.split("\\s+", 2);
         assert parts.length > 0 : "split should return at least one part";
         String commandWord = parts[0].toUpperCase();
         assert !commandWord.isEmpty() : "commandWord should not be empty";
@@ -79,20 +83,39 @@ public class Parser {
     }
 
     private static Command parseDeadline(String arguments) throws JoJoException {
-        if (!arguments.contains(BY_DELIMITER)) {
+        if (!arguments.contains("/by")) {
             throw new JoJoException("NANI?! Use format: deadline [task] /by [date(yyyy-mm-dd)]");
         }
-        String[] dParts = arguments.split(BY_DELIMITER);
+        String[] dParts = arguments.split("\\s+/by\\s+", 2);
+        if (dParts.length < 2 || dParts[0].trim().isEmpty() || dParts[1].trim().isEmpty()) {
+            throw new JoJoException("NANI?! The description and date of a deadline cannot be empty.");
+        }
+        if (dParts[1].contains("/by")) {
+            throw new JoJoException("NANI?! You specified /by multiple times.");
+        }
         return new AddDeadlineCommand(dParts[0].trim(), dParts[1].trim());
     }
 
     private static Command parseEvent(String arguments) throws JoJoException {
-        if (!arguments.contains(FROM_DELIMITER) || !arguments.contains(TO_DELIMITER)) {
+        if (!arguments.contains("/from") || !arguments.contains("/to")) {
             throw new JoJoException("NANI?! Use format: event [task] /from [start] /to [end]");
         }
-        String[] eParts = arguments.split(FROM_DELIMITER);
-        String[] tParts = eParts[1].split(TO_DELIMITER);
-        return new AddEventCommand(eParts[0].trim(), tParts[0].trim(), tParts[1].trim());
+
+        String[] fromParts = arguments.split("\\s+/from\\s+", 2);
+        if (fromParts.length < 2 || fromParts[0].trim().isEmpty()) {
+            throw new JoJoException("NANI?! Event description or /from part is missing.");
+        }
+
+        String[] toParts = fromParts[1].split("\\s+/to\\s+", 2);
+        if (toParts.length < 2 || toParts[0].trim().isEmpty() || toParts[1].trim().isEmpty()) {
+            throw new JoJoException("NANI?! Event /from or /to content is missing.");
+        }
+
+        if (toParts[1].contains("/from") || toParts[1].contains("/to") || toParts[0].contains("/from")) {
+            throw new JoJoException("NANI?! You specified /from or /to multiple times.");
+        }
+
+        return new AddEventCommand(fromParts[0].trim(), toParts[0].trim(), toParts[1].trim());
     }
 
     private static Command parseDelete(String arguments) throws JoJoException {
@@ -118,7 +141,11 @@ public class Parser {
      */
     private static int parseIndex(String args) throws JoJoException {
         try {
-            return Integer.parseInt(args) - 1;
+            int index = Integer.parseInt(args) - 1;
+            if (index < 0) {
+                throw new JoJoException("NANI?! Please provide a positive task number.");
+            }
+            return index;
         } catch (NumberFormatException e) {
             throw new JoJoException("NANI?! Please provide a valid task number.");
         }

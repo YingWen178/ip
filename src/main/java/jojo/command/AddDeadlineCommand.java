@@ -33,13 +33,17 @@ public class AddDeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Deadline d = new Deadline(description, by);
-        if (tasks.contains(d)) {
-            return ui.showDuplicateTask(d);
+        try {
+            Deadline d = new Deadline(description, by);
+            if (tasks.contains(d)) {
+                return ui.showDuplicateTask(d);
+            }
+            tasks.add(d);
+            storage.save(tasks);
+            return ui.showAddedTask(d, tasks.size());
+        } catch (jojo.exception.JoJoException e) {
+            return ui.showErr(e.getMessage());
         }
-        tasks.add(d);
-        storage.save(tasks);
-        return ui.showAddedTask(d, tasks.size());
     }
 
     /**

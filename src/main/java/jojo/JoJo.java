@@ -28,12 +28,7 @@ public class JoJo {
         storage = new Storage(filePath);
         assert ui != null : "Ui should be initialized";
         assert storage != null : "Storage should be initialized";
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (java.io.IOException e) {
-            System.out.println(ui.showLoadingError());
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
         assert tasks != null : "TaskList should be initialized";
     }
 

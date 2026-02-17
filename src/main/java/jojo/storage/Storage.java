@@ -41,13 +41,12 @@ public class Storage {
      * @return An ArrayList of Task objects parsed from the storage file.
      * @throws IOException If there is an error creating or reading the file.
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() {
         assert filePath != null : "filePath should be initialized before load";
         ArrayList<Task> list = new ArrayList<>();
         File file = new File(filePath);
 
         if (!file.exists()) {
-            file.createNewFile();
             return list;
         }
 
@@ -55,11 +54,18 @@ public class Storage {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 if (!line.trim().isEmpty()) {
-                    Task t = parseTask(line);
-                    assert t != null : "parsed task should not be null for a valid line";
-                    list.add(t);
+                    try {
+                        Task t = parseTask(line);
+                        if (t != null) {
+                            list.add(t);
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Skipping corrupted line: " + line);
+                    }
                 }
             }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
         }
         return list;
     }
@@ -72,13 +78,19 @@ public class Storage {
      */
     public void save(TaskList tasks) {
         assert tasks != null : "TaskList to save should not be null";
-        try (FileWriter fw = new FileWriter(filePath)) {
+        File file = new File(filePath);
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+
+        try (FileWriter fw = new FileWriter(file)) {
             for (Task t : tasks.getAll()) {
                 assert t != null : "Tasks in the list should not be null";
                 fw.write(t.toSaveString() + System.lineSeparator());
             }
         } catch (IOException e) {
-            System.out.println("Error saving to file: " + e.getMessage());
+            System.err.println("Error saving to file: " + e.getMessage());
         }
     }
 
@@ -89,8 +101,11 @@ public class Storage {
      * @param line The raw string line from the file.
      * @return A Task object (Todo, Deadline, or Event), or null if the type is unknown.
      */
-    private Task parseTask(String line) {
+    private Task parseTask(String line) throws Exception {
         String[] parts = line.split(DELIMITER);
+        if (parts.length < 3) {
+            throw new Exception("Incomplete task information");
+        }
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
@@ -101,9 +116,15 @@ public class Storage {
             task = new Todo(description);
             break;
         case DEADLINE_TYPE:
+            if (parts.length < 4) {
+                throw new Exception("Missing deadline date");
+            }
             task = new Deadline(description, parts[3]);
             break;
         case EVENT_TYPE:
+            if (parts.length < 5) {
+                throw new Exception("Missing event times");
+            }
             task = new Event(description, parts[3], parts[4]);
             break;
         default:
